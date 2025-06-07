@@ -14,9 +14,15 @@ class Program
         video2.AddComment(new Comment("Zac", "It seems easy to make"));
         video2.AddComment(new Comment("Greg", "Great vieo, thx"));
 
+        Video video3 = new Video("How to do your first pull-up", "Marcus", 800);
+        video3.AddComment(new Comment("Stephany", "You make it seem so easy"));
+        video3.AddComment(new Comment("Ommar", "My goal is to get one this year"));
+        video3.AddComment(new Comment("James", "Good form, like the video"));
+
         VideoLibrary library = new VideoLibrary();
         library.AddVideo(video1);
         library.AddVideo(video2);
+        library.AddVideo(video3);
 
         foreach (Video video in library.GetAllVideos())
         {
