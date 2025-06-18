@@ -1,26 +1,27 @@
 using System;
 
-public class SimpleGoal
+public class SimpleGoal : Goal
 {
-    private bool _isComplete;
+    private bool _isComplete = false;
 
 
-    public SimpleGoal(string name, string description, string points)
+    public SimpleGoal(string name, string description, int points) : base(name, description, points)
     {
     }
 
-    public void RecordEvent()
-    {
 
+    public override void RecordEvent()
+    {
+        _isComplete = true;
     }
 
-    public bool IsComplete()
+    public override bool IsComplete()
     {
-        return false;
+        return _isComplete;
     }
 
-    public string GetStringRepresentation()
+    public override string GetStringRepresentation()
     {
-        return " ";
+        return $"SimpleGoal,{GetName()},{GetDescription()},{GetPoints()},{_isComplete}";
     }
 }

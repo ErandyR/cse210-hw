@@ -4,33 +4,57 @@ public class Goal
 {
     private string _shortName;
     private string _description;
-    private string _points;
+    private int _points;
 
 
-    public Goal(string name, string description, string points)
+    public Goal(string name, string description, int points)
     {
         _shortName = name;
         _description = description;
         _points = points;
     }
 
-    public void RecordEvent()
+    public string GetName()
+    {
+        return _shortName;
+    }
+
+    public string GetDescription()
+    {
+        return _description;
+    }
+    public int GetPoints()
+    {
+        return _points;
+    }
+
+    public virtual void RecordEvent()
     {
 
     }
 
-    public bool IsComplete()
+    public virtual bool IsComplete()
     {
         return false;
     }
 
-    public string GetDetailsString()
+    public virtual string GetDetailsString()
     {
-        return " ";
+        string checkbox;
+        if (IsComplete() == true)
+        {
+            checkbox = "[X]";
+        }
+        else
+        {
+            checkbox = "[ ]";
+        }
+        return $"{checkbox} {_shortName} ({_description})";
     }
 
-    public string GetStringRepresentation()
+    public virtual string GetStringRepresentation()
     {
-        return " ";
+        return $"{_shortName},{_description},{_points}";
+
     }
 }

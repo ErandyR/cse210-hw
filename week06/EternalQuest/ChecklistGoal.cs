@@ -1,35 +1,65 @@
 using System;
+using System.Drawing;
+using System.Formats.Tar;
 
-public class ChecklistGoal
+public class ChecklistGoal : Goal
 {
     private int _amountCompleted;
     private int _target;
     private int _bonus;
 
 
-    public ChecklistGoal(string name, string description, string points, int target, int bonus)
+    public ChecklistGoal(string name, string description, int points, int target, int bonus) : base(name, description, points)
     {
+
         _target = target;
         _bonus = bonus;
     }
 
-    public void RecordEvent()
+    public int GetBonus()
     {
-
+        return _bonus;
     }
 
-    public bool IsComplete()
+    public void SetCompleted(int count)
     {
-        return false;
+        _amountCompleted = count;
     }
 
-    public string GetDetailsString()
+    public override void RecordEvent()
     {
-        return " ";
+        _amountCompleted++;
     }
 
-    public string GetStringRepresentation()
+    public override bool IsComplete()
     {
-        return " ";
+        if (_amountCompleted >= _target)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override string GetDetailsString()
+    {
+        string checkbox;
+        if (IsComplete() == true)
+        {
+            checkbox = "[X]";
+        }
+        else
+        {
+            checkbox = "[ ]";
+        }
+        return $"{checkbox} {GetName()} ({GetDescription()}) -- Currently completed: {_amountCompleted}/{_target}";
+    }
+
+    public override string GetStringRepresentation()
+    {
+        return $"ChecklistGoal,{GetName()},{GetDescription()},{GetPoints()},{_target},{_bonus},{_amountCompleted}";
+
     }
 }
